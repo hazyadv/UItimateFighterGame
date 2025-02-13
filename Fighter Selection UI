@@ -1,0 +1,26 @@
+import SwiftUI
+
+struct FighterSelectionView: View {
+    @State private var selectedCharacter: String = "Fighter 1"
+
+    var body: some View {
+        VStack {
+            Text("🦸 Select Your Fighter")
+                .font(.largeTitle)
+                .bold()
+                .padding()
+
+            Picker("Choose Fighter", selection: $selectedCharacter) {
+                Text("Fighter 1").tag("Fighter 1")
+                Text("Fighter 2").tag("Fighter 2")
+                Text("Fighter 3").tag("Fighter 3")
+            }
+            .pickerStyle(WheelPickerStyle())
+            .padding()
+
+            NavigationLink(destination: PvPGameSceneView(selectedCharacter: selectedCharacter)) {
+                Text("Confirm & Fight").buttonStyle()
+            }
+        }
+    }
+}

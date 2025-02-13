@@ -1,0 +1,20 @@
+import AVFoundation
+
+class VoiceChatManager {
+    static let shared = VoiceChatManager()
+    private var audioSession: AVAudioSession
+    
+    private init() {
+        audioSession = AVAudioSession.sharedInstance()
+    }
+    
+    func startVoiceChat() {
+        do {
+            try audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: .defaultToSpeaker)
+            try audioSession.setActive(true)
+            print("Voice chat enabled")
+        } catch {
+            print("Voice chat failed to start")
+        }
+    }
+}

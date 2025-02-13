@@ -1,0 +1,41 @@
+import SwiftUI
+
+struct MainMenuView: View {
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("🔥 Ultimate Fighter Game")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+
+                NavigationLink(destination: FighterSelectionView()) {
+                    Text("🦸 Select Fighter").buttonStyle()
+                }
+
+                NavigationLink(destination: PvPGameSceneView()) {
+                    Text("⚔️ Start PvP Match").buttonStyle()
+                }
+
+                NavigationLink(destination: CoOpGameSceneView()) {
+                    Text("👥 Start 2v2 Team Battle").buttonStyle()
+                }
+
+                NavigationLink(destination: BattlePassView()) {
+                    Text("🎟️ Battle Pass").buttonStyle()
+                }
+            }
+        }
+    }
+}
+
+extension View {
+    func buttonStyle() -> some View {
+        self.padding()
+            .frame(maxWidth: 200)
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .padding(5)
+    }
+}

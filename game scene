@@ -1,0 +1,32 @@
+import SpriteKit
+
+class GameScene: SKScene {
+    var player: Player!
+    
+    override func didMove(to view: SKView) {
+        backgroundColor = .white
+        
+        player = Player()
+        player.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        addChild(player)
+        
+        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        
+        if location.y > player.position.y {
+            player.jumpKick()
+        } else {
+            player.attack()
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        if let body = player.physicsBody, body.velocity.dy == 0 {
+            player.isJumping = false
+        }
+    }
+}

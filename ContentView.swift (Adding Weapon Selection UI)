@@ -1,0 +1,65 @@
+
+import SwiftUI
+import SpriteKit
+
+struct ContentView: View {
+    @State private var selectedWeapon: WeaponType = .knife
+    
+    var scene: SKScene {
+        let scene = GameScene(size: UIScreen.main.bounds.size)
+        scene.scaleMode = .resizeFill
+        return scene
+    }
+    
+    var body: some View {
+        ZStack {
+            SpriteView(scene: scene)
+                .ignoresSafeArea()
+            
+            VStack {
+                HStack {
+                    Button(action: { 
+                        selectedWeapon = .shotgun
+                    }) {
+                        Image(systemName: "gun")
+                            .padding()
+                            .background(Color.gray)
+                            .clipShape(Circle())
+                    }
+                    Button(action: { 
+                        selectedWeapon = .machineGun
+                    }) {
+                        Image(systemName: "sparkles")
+                            .padding()
+                            .background(Color.gray)
+                            .clipShape(Circle())
+                    }
+                    Button(action: { 
+                        selectedWeapon = .knife
+                    }) {
+                        Image(systemName: "scissors")
+                            .padding()
+                            .background(Color.gray)
+                            .clipShape(Circle())
+                    }
+                    Button(action: { 
+                        selectedWeapon = .bomb
+                    }) {
+                        Image(systemName: "flame.fill")
+                            .padding()
+                            .background(Color.red)
+                            .clipShape(Circle())
+                    }
+                }
+                .padding()
+                
+                Spacer()
+            }
+        }
+        .onAppear {
+            if let gameScene = scene as? GameScene {
+                gameScene.player.weapon = selectedWeapon
+            }
+        }
+    }
+}

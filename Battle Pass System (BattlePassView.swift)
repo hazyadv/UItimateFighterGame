@@ -1,0 +1,21 @@
+import Foundation
+
+class BattlePassManager {
+    static let shared = BattlePassManager()
+    
+    private var isPremium: Bool = false
+    private var rewards: [String] = [
+        "🔥 Exclusive Fighter Skin",
+        "⚔️ Legendary Weapon",
+        "🎭 Unique Emote",
+        "💰 500 In-Game Coins"
+    ]
+    
+    func purchasePremiumPass() {
+        isPremium = true
+    }
+    
+    func getRewards() -> [String] {
+        return isPremium ? rewards : ["Upgrade to Premium to Unlock Rewards"]
+    }
+}

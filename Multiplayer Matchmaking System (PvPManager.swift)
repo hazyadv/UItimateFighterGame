@@ -1,0 +1,25 @@
+import Foundation
+
+class PvPManager {
+    static let shared = PvPManager()
+    
+    private var playersQueue: [String] = []
+    
+    func joinQueue(playerID: String) {
+        playersQueue.append(playerID)
+        checkForMatch()
+    }
+    
+    func checkForMatch() {
+        if playersQueue.count >= 2 {
+            let player1 = playersQueue.removeFirst()
+            let player2 = playersQueue.removeFirst()
+            startMatch(player1: player1, player2: player2)
+        }
+    }
+    
+    func startMatch(player1: String, player2: String) {
+        print("Match Started: \(player1) vs \(player2)")
+        // Here you would initialize the multiplayer game scene
+    }
+}

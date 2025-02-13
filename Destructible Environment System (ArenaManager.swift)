@@ -1,0 +1,29 @@
+import SpriteKit
+
+class ArenaManager {
+    var scene: SKScene
+
+    init(scene: SKScene) {
+        self.scene = scene
+    }
+
+    func createBreakableWall(position: CGPoint) {
+        let wall = SKSpriteNode(imageNamed: "breakable_wall")
+        wall.position = position
+        wall.name = "breakable"
+        wall.physicsBody = SKPhysicsBody(rectangleOf: wall.size)
+        wall.physicsBody?.isDynamic = false
+        wall.physicsBody?.categoryBitMask = 1
+        wall.physicsBody?.collisionBitMask = 2
+        scene.addChild(wall)
+    }
+
+    func breakObject(_ node: SKNode?) {
+        if let wall = node, wall.name == "breakable" {
+            wall.removeFromParent()
+            let explosion = SKEmitterNode(fileNamed: "Explosion.sks")
+            explosion?.position = wall.position
+            scene.addChild(explosion!)
+        }
+    }
+}

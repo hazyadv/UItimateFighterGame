@@ -1,0 +1,17 @@
+import Foundation
+
+class SettingsManager {
+    static let shared = SettingsManager()
+
+    var graphicsQuality: String = "High"
+    var enableBloodEffects: Bool = true
+    var enableVoiceChat: Bool = true
+    
+    func toggleBloodEffects() {
+        enableBloodEffects.toggle()
+    }
+
+    func changeGraphicsQuality(to quality: String) {
+        graphicsQuality = quality
+    }
+}

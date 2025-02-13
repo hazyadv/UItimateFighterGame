@@ -1,0 +1,36 @@
+import SwiftUI
+import SpriteKit
+
+struct CoOpGameSceneView: View {
+    var body: some View {
+        SpriteView(scene: CoOpGameScene())
+            .ignoresSafeArea()
+    }
+}
+
+class CoOpGameScene: SKScene {
+    override func didMove(to view: SKView) {
+        backgroundColor = .darkGray
+        setupFighters()
+    }
+
+    func setupFighters() {
+        let team1_fighter1 = createFighter(named: "Fighter1", x: 100, y: size.height / 2)
+        let team1_fighter2 = createFighter(named: "Fighter2", x: 200, y: size.height / 2)
+
+        let team2_fighter1 = createFighter(named: "Fighter3", x: size.width - 100, y: size.height / 2)
+        let team2_fighter2 = createFighter(named: "Fighter4", x: size.width - 200, y: size.height / 2)
+
+        addChild(team1_fighter1)
+        addChild(team1_fighter2)
+        addChild(team2_fighter1)
+        addChild(team2_fighter2)
+    }
+
+    func createFighter(named: String, x: CGFloat, y: CGFloat) -> SKSpriteNode {
+        let fighter = SKSpriteNode(imageNamed: named)
+        fighter.position = CGPoint(x: x, y: y)
+        fighter.setScale(1.5)
+        return fighter
+    }
+}

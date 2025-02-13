@@ -1,0 +1,26 @@
+import SpriteKit
+
+class WeaponManager {
+    var scene: SKScene
+
+    init(scene: SKScene) {
+        self.scene = scene
+    }
+
+    func spawnWeapon(at position: CGPoint) {
+        let weapon = SKSpriteNode(imageNamed: "sword")
+        weapon.position = position
+        weapon.name = "weapon"
+        weapon.physicsBody = SKPhysicsBody(rectangleOf: weapon.size)
+        weapon.physicsBody?.isDynamic = true
+        weapon.physicsBody?.categoryBitMask = 2
+        scene.addChild(weapon)
+    }
+
+    func pickUpWeapon(_ fighter: SKNode?) {
+        if let player = fighter, let weapon = scene.childNode(withName: "weapon") {
+            weapon.removeFromParent()
+            player.userData = ["hasWeapon": true]
+        }
+    }
+}
